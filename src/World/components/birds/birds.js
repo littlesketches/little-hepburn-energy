@@ -10,6 +10,7 @@ async function loadBirds() {
     loader.loadAsync('./assets/models/Stork.glb'),
   ]);
 
+
   const parrot = setupModel(parrotData);
   parrot.position.set(0, 50, 2.5);
 
