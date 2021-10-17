@@ -11,7 +11,7 @@ async function loadLandscape() {
 
 
   const [landscapeData] = await Promise.all([
-    gltfLoader.loadAsync('./assets/models/little-hepburn-energy-draco.glb')
+    gltfLoader.loadAsync('./assets/models/little-hepburn-energy.gltf')
   ]);
 
   const landscape = setupModel(landscapeData);
