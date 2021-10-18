@@ -34,7 +34,6 @@ class World {
     controls = createControls(camera, renderer.domElement);
 
     const { ambientLight, directionalLight } = createLights(datGUI);
-console.log(ambientLight, directionalLight)
     loop.updatables.push(controls);
     scene.add(ambientLight, directionalLight);
 

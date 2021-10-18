@@ -32,7 +32,7 @@ class Loop {
       object.tick(elapsedTime, delta/1000);
     }
 
-    
+    settings.gui.stats.update()
   }
 }
 

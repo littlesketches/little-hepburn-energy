@@ -1,7 +1,7 @@
 import { GUI } from 'https://unpkg.com/three@0.127.0/examples/jsm/libs/dat.gui.module.js';
+import Stats from 'https://unpkg.com/three@0.127.0/examples/jsm/libs/stats.module'
 
 function createDatGUI() {
-
   const gui = new GUI({name: 'Little Hepburn Energy'});
 
   const lightFolder = gui.addFolder('Lighting controls')
@@ -16,6 +16,9 @@ function createDatGUI() {
     .onChange(() => settings.elements.lights.ambientLight.color.set(settings.lights.ambientLight.sky) )
   hemiLightFolder.addColor(settings.lights.ambientLight, 'ground').name('Ground colour')
     .onChange(() => settings.elements.lights.ambientLight.groundColor.set(settings.lights.ambientLight.ground) )
+
+  settings.gui.stats = Stats()
+  document.body.appendChild(settings.gui.stats.dom)
 
   return gui;
 }

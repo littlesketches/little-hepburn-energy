@@ -2,7 +2,6 @@ import { Math as MathUtils } from 'https://unpkg.com/three@0.127.0/build/three.m
 
 async function createSceneAnimations(gui) {
 
-
   ///  WIND TURBINE
     settings.wind.turbine.gale.blades.tick = (elapsedTime, delta) => settings.wind.turbine.gale.blades.rotation.z += (delta * Math.PI * 2/ 60)  * settings.wind.turbine.gale.rpm
     settings.wind.turbine.gusto.blades.tick = (elapsedTime, delta) => settings.wind.turbine.gusto.blades.rotation.z += (delta * Math.PI * 2/ 60) * settings.wind.turbine.gusto.rpm
@@ -17,7 +16,6 @@ async function createSceneAnimations(gui) {
         .name("Gale RPM")
     windFolder.add( settings.wind.turbine.gusto, 'rpm', 0, 25.0, 0.1 ).onChange( windChanged )
         .name("Gusto RPM")
-
 
   // FLOCK OF BIRDS
   settings.elements.flock.tick = (elapsedTime) =>  {

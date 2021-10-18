@@ -48,6 +48,9 @@ const settings = {
         },
         flock :     null,
 
+    },         
+    gui: {
+        stats:      null
     }
 
 }
