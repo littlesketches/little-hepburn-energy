@@ -9,17 +9,11 @@ async function loadLandscape() {
   const gltfLoader = new GLTFLoader();
   gltfLoader.setDRACOLoader(dracoLoader)
 
-
   const [landscapeData] = await Promise.all([
-    gltfLoader.loadAsync('./assets/models/little-hepburn-energy-draco.glb')
+    gltfLoader.loadAsync('./assets/models/little-hepburn-energy.gltf')
   ]);
 
-  const landscape = setupModel(landscapeData);
-  landscape.position.set(0, 0, 0);
-  
-  return {
-    landscape
-  };
+  return setupModel(landscapeData);
 }
 
 export { loadLandscape};

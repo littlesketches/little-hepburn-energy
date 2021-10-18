@@ -1,6 +1,7 @@
 import { Clock } from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 
 const clock = new Clock();
+let time = Date.now()
 
 class Loop {
   constructor(camera, scene, renderer) {
@@ -11,12 +12,9 @@ class Loop {
   }
 
   start() {
-    this.renderer.setAnimationLoop(() => {
-      // tell every animated object to tick forward one frame
+    this.renderer.setAnimationLoop(() => {     
       this.tick();
-
-      // render a frame
-      this.renderer.render(this.scene, this.camera);
+      this.renderer.render(this.scene, this.camera);        // render a frame
     });
   }
 
@@ -25,11 +23,16 @@ class Loop {
   }
 
   tick() {
-    const delta = clock.getDelta();
+    const elapsedTime = clock.getElapsedTime(),
+      currentTime = Date.now(), 
+      delta = currentTime - time
+    time = currentTime
 
     for (const object of this.updatables) {
-      object.tick(delta);
+      object.tick(elapsedTime, delta/1000);
     }
+
+    
   }
 }
 

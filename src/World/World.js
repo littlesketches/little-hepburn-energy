@@ -10,7 +10,7 @@ import { createScene }   from './components/scene.js';
 
 import { createCameraHelper }    from './systems/cameraHelper.js';
 import { createControls }        from './systems/controls.js';
-import { createDatGUI }          from './systems/datGUI.js';
+import { createDatGUI }          from './systems/debug.js';
 import { createRenderer }        from './systems/renderer.js';
 import { Resizer }               from './systems/Resizer.js';
 import { Loop }                  from './systems/Loop.js';
@@ -20,7 +20,6 @@ let camera;
 let controls;
 let renderer;
 let loop;
-let light
 
 let cameraHelper, datGUI;
 
@@ -34,14 +33,13 @@ class World {
     container.append(renderer.domElement);
     controls = createControls(camera, renderer.domElement);
 
-    const { ambientLight, mainLight } = createLights();
-    light = mainLight
-
+    const { ambientLight, directionalLight } = createLights(datGUI);
+console.log(ambientLight, directionalLight)
     loop.updatables.push(controls);
-    scene.add(ambientLight, mainLight);
+    scene.add(ambientLight, directionalLight);
 
     // Helpers
-    cameraHelper = createCameraHelper(light.shadow.camera);
+    cameraHelper = createCameraHelper(directionalLight.shadow.camera);
     datGUI = createDatGUI()
 
     const resizer = new Resizer(container, camera, renderer);
@@ -49,18 +47,19 @@ class World {
 
 
   async init() {
+    // Camera
+    controls.target.set(settings.camera.target.x, settings.camera.target.y, settings.camera.target.z);                          // Set the orbit controls target
+    // Scene elements
     const sky = createSky(renderer, scene, camera, datGUI);
-    const { landscape } = await loadLandscape();
-    const { parrot, flamingo, stork } = await loadBirds();
-    const { galeBlades, gustoBlades} = await createSceneAnimations();
-
-
-    controls.target.set(0, 20, 0);                          // Set the orbit controls target
-    loop.updatables.push(parrot, flamingo, stork, galeBlades, gustoBlades);
-    scene.add(sky, landscape, parrot, flamingo, stork);
-
-
-  }
+    const landscape = await loadLandscape();
+    const flock = await loadBirds();
+    const { animGaleBlades, animGustoBlades, animFlock} = await createSceneAnimations(datGUI);
+    scene.add( sky, landscape, flock );
+    // Animation (updatables)
+    loop.updatables.push( animFlock, animGaleBlades, animGustoBlades );
+    for (const bird of flock.children) { loop.updatables.push(bird) }
+    
+  };
 
   render() {
     renderer.render(scene, camera);
