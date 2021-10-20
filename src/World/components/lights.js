@@ -2,12 +2,15 @@ import { DirectionalLight, HemisphereLight } from 'https://unpkg.com/three@0.127
 
 function createLights() {
   settings.elements.lights.ambientLight = new HemisphereLight(
-    'white',
-    'green',
-    0.5,
+    settings.lights.ambientLight.sky,
+    settings.lights.ambientLight.ground,
+    settings.lights.ambientLight.intensity
   );
 
-  settings.elements.lights.directionalLight = new DirectionalLight(0xffffff, 2);
+  settings.elements.lights.directionalLight = new DirectionalLight(
+    settings.lights.directionalLight.color,
+    settings.lights.directionalLight.intensity
+  );
   settings.elements.lights.directionalLight.position.set(0, 300, 300);
   settings.elements.lights.directionalLight.castShadow = true
 

@@ -10,9 +10,6 @@ async function loadBirds() {
     loader.loadAsync('./assets/models/Flamingo.glb'),
     loader.loadAsync('./assets/models/Stork.glb'),
   ])
-
-    console.log(parrotData, flamingoData, storkData)
-
       // Setup each bird with flight animation clip
       const parrot1 = setupModel(parrotData);
       const parrot2 = setupModel(parrotData);
@@ -20,7 +17,6 @@ async function loadBirds() {
       // const flamingo2 = setupModel(flamingoData); 
       const stork1 = setupModel(storkData);
       // const stork2 = setupModel(storkData);
-
 
       parrot1.position.set(0, 0, 0);
       flamingo1.position.set(-5, 0, -10);

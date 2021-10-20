@@ -39,3 +39,10 @@ h1 {
 .dg li {
   text-align: left;
 }
+.dg li.gui-stats:not(.folder) {
+  height: auto;
+}
+.dg li.gui-stats div{
+  display: grid;
+  grid-template-columns: 1fr 1fr;;
+}

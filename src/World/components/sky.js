@@ -4,7 +4,7 @@ import { Vector3, MathUtils } from 'https://unpkg.com/three@0.127.0/build/three.
 let sky, sun;
 
 function createSky(renderer, scene, camera, gui) {
-    // Add Sky
+    // Add Sky (minor adaptation from  https://threejs.org/examples/webgl_shaders_sky.html)
     sky = new Sky();
     sky.scale.setScalar( 450000 );
     sky.rotation.y = Math.PI
@@ -35,13 +35,13 @@ function createSky(renderer, scene, camera, gui) {
 
     // Add GUI
     const skyFolder = gui.addFolder('Sky controls' );
-    skyFolder.add( settings.sky, 'turbidity', 0.0, 20.0, 0.1 ).onChange( guiChanged );
+    skyFolder.add( settings.sky, 'turbidity', 0.0, 20.0, 0.1 ).name('Turbidity').onChange( guiChanged );
     skyFolder.add( settings.sky, 'rayleigh', 0.0, 4, 0.001 ).onChange( guiChanged );
     skyFolder.add( settings.sky, 'mieCoefficient', 0.0, 0.1, 0.001 ).onChange( guiChanged );
     skyFolder.add( settings.sky, 'mieDirectionalG', 0.0, 1, 0.001 ).onChange( guiChanged );
-    skyFolder.add( settings.sky, 'elevation', 0, 90, 0.1 ).onChange( guiChanged );
-    skyFolder.add( settings.sky, 'azimuth', 0, 360, 0.1 ).onChange( guiChanged );
-    skyFolder.add( settings.sky, 'exposure', 0, 1, 0.0001 ).onChange( guiChanged );
+    skyFolder.add( settings.sky, 'elevation', -10, 90, 0.1 ).name('Elevation (sun)').onChange( guiChanged );
+    skyFolder.add( settings.sky, 'azimuth', 0, 360, 0.1 ).name('Azimuth (sun horizon position)').onChange( guiChanged );
+    skyFolder.add( settings.sky, 'exposure', 0, 1, 0.0001 ).name('Exposure (light level)').onChange( guiChanged );
 
     guiChanged();
 

@@ -10,10 +10,12 @@ const settings = {
     lights:{
         ambientLight: {
             sky:            '#FFFFFF',
-            ground:         '#00FF00'
+            ground:         '#FFFFFF',  
+            intensity:      0.5
         },
         directionalLight: {
             color:            '#FFFFFF',
+            intensity:      2.0
         }
     },
     sky: {
@@ -22,7 +24,7 @@ const settings = {
         mieCoefficient:     0.005,
         mieDirectionalG:    0.7,
         elevation:          5,
-        azimuth:            200,
+        azimuth:            305,
         exposure:           0.5
     },
     wind: {
