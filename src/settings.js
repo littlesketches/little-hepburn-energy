@@ -14,18 +14,22 @@ const settings = {
             intensity:      0.5
         },
         directionalLight: {
-            color:            '#FFFFFF',
+            color:          '#FFFFFF',
             intensity:      2.0
         }
     },
     sky: {
-        turbidity:          0,
-        rayleigh:           0.75,
+        turbidity:          3,
+        rayleigh:           0.2,
         mieCoefficient:     0.005,
         mieDirectionalG:    0.7,
         elevation:          5,
         azimuth:            305,
-        exposure:           0.5
+        exposure:           0.7
+    },
+    fog: {
+        color:              '#FFFFFF',
+        density:            0,
     },
     wind: {
         direction:          0,      // Degrees from North,
@@ -49,6 +53,7 @@ const settings = {
             directionalLight:   null
         },
         flock :     null,
+        fog:        null
 
     },         
     gui: {
