@@ -53,7 +53,9 @@ class World {
     const landscape = await loadLandscape();
     const flock = await loadBirds();
     const { animGaleBlades, animGustoBlades, animFlock} = await createSceneAnimations(datGUI);
+
     scene.add( sky, landscape, flock );
+
     // Animation (updatables)
     loop.updatables.push( animFlock, animGaleBlades, animGustoBlades );
     for (const bird of flock.children) { loop.updatables.push(bird) }
