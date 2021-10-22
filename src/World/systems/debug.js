@@ -5,10 +5,12 @@ function createDatGUI() {
 
   // Dat GUI and main folders
   const gui = new GUI({name: 'Little Hepburn Energy'});
-  const perfFolder = gui.addFolder("Performance monitor");
-  const lightFolder = gui.addFolder('Lighting controls');
+  const perfFolder = gui.addFolder("Scene");
+  // const cameraFolder =  gui.addFolder("Camera controls")
+  const envFolder =  gui.addFolder("Environment controls")
 
-  // Add Stats.js (integrated into Dat GUI)
+
+  // 1. Add Stats.js (integrated into Dat GUI)
   settings.gui.stats = Stats()
   document.body.appendChild(settings.gui.stats.dom)
 
@@ -19,7 +21,7 @@ function createDatGUI() {
 
   settings.gui.stats.domElement.style.position = "static";
   perfPropName.classList.add('title')
-  perfPropName.innerHTML = "Live stats"
+  perfPropName.innerHTML = "Perf. monitor"
   perfLi.appendChild(perfContainer)
   perfContainer.appendChild(perfPropName)
   perfContainer.appendChild(perfStatsContainer)
@@ -27,9 +29,17 @@ function createDatGUI() {
   perfStatsContainer.appendChild( settings.gui.stats.domElement);
   perfFolder.__ul.appendChild(perfLi);
 
-  // Add lLighting controls (with subfolders for directional and hemisphere lights)
-  const directionalLightFolder = lightFolder.addFolder('Directional light (sun)')
-  const hemiLightFolder = lightFolder.addFolder('Ambient (hemisphere) light')
+
+  // 2. Cinematic camera
+  // cameraFolder.add(settings.elements.camera.perspective, 'x', 1, 135, 0.01)
+  // cameraFolder.add(settings.elements.camera.perspective, 'focus', 1.8, 22, 0.01)
+
+
+
+  // 3. Add Lighting controls (with subfolders for directional and hemisphere lights)
+  const lightFolder = envFolder.addFolder('Lighting controls'),
+    directionalLightFolder = lightFolder.addFolder('Directional light (sun)'),
+    hemiLightFolder = lightFolder.addFolder('Ambient (hemisphere) light')
 
   directionalLightFolder.add(settings.elements.lights.directionalLight, 'intensity', 0, 50, 0.05).name('Intensity')
     .onChange(() => settings.lights.directionalLight.intensity = settings.elements.lights.directionalLight.intensity)

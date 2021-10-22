@@ -15,7 +15,8 @@ function createLights() {
   settings.elements.lights.directionalLight.castShadow = true
 
   // Set up shadow properties for the light
-  settings.elements.lights.directionalLight.shadow.mapSize.height  = 2048; 
+  settings.elements.lights.directionalLight.shadow.mapSize.height  = 4096; 
+  settings.elements.lights.directionalLight.shadow.mapSize.width  = 4096; 
   settings.elements.lights.directionalLight.shadow.camera.near     = 0.5; 
   settings.elements.lights.directionalLight.shadow.camera.far      = 620; 
   settings.elements.lights.directionalLight.shadow.camera.left     = -320; 

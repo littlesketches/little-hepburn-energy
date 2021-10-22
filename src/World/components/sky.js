@@ -34,9 +34,9 @@ function createSky(renderer, scene, camera, gui) {
     }
 
     // Add GUI
-    const skyFolder = gui.addFolder('Sky controls' );
+    const skyFolder = gui.__folders["Environment controls"].addFolder('Sky (atmosphere) controls' );
     skyFolder.add( settings.sky, 'turbidity', 0.0, 20.0, 0.1 ).name('Turbidity').onChange( guiChanged );
-    skyFolder.add( settings.sky, 'rayleigh', 0.0, 4, 0.001 ).onChange( guiChanged );
+    skyFolder.add( settings.sky, 'rayleigh', 0.0, 4, 0.001 ).name('Rayleigh ').onChange( guiChanged );
     skyFolder.add( settings.sky, 'mieCoefficient', 0.0, 0.1, 0.001 ).onChange( guiChanged );
     skyFolder.add( settings.sky, 'mieDirectionalG', 0.0, 1, 0.001 ).onChange( guiChanged );
     skyFolder.add( settings.sky, 'elevation', -10, 90, 0.1 ).name('Elevation (sun)').onChange( guiChanged );

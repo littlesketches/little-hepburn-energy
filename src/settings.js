@@ -4,8 +4,14 @@
 
 const settings = {
     camera: {
+        type:   'perspective',
         pos:    { x: 200 ,  y: 100,     z: -200   }, 
-        target: { x: 0 ,    y: 20,      z: 0   } 
+        target: { x: 0 ,    y: 20,      z: 0   }, 
+        perspective: {  
+            fov:        35,
+            near:       0.1,
+            far:        2000
+        }
     },
     lights:{
         ambientLight: {
@@ -48,6 +54,9 @@ const settings = {
         }
     },
     elements: {
+        camera: {
+            perspective:        null
+        },
         lights: {
             ambientLight:       null,
             directionalLight:   null

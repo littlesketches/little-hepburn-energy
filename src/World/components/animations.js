@@ -11,7 +11,7 @@ async function createSceneAnimations(gui) {
       settings.wind.turbine.gusto.rpm
     }
 
-    const windFolder = gui.addFolder('Wind controls' );
+    const windFolder = gui.__folders["Environment controls"].addFolder('Wind controls' );
     windFolder.add( settings.wind.turbine.gale, 'rpm', 0, 25.0, 0.1 ).onChange( windChanged )
         .name("Gale RPM")
     windFolder.add( settings.wind.turbine.gusto, 'rpm', 0, 25.0, 0.1 ).onChange( windChanged )

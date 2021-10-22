@@ -4,7 +4,7 @@ function addFog(scene, gui) {
   settings.elements.fog = new FogExp2(settings.fog.color, settings.fog.density)
   scene.fog = settings.elements.fog
 
-  const fogFolder = gui.addFolder('Fog')
+  const fogFolder = gui.__folders["Environment controls"].addFolder('Fog')
 
   fogFolder.add(scene.fog, 'density', 0, 0.005, 0.0001).name('Fog density')
   fogFolder.addColor(settings.fog, 'color').name('Colour')

@@ -34,18 +34,19 @@ class World {
     container.append(renderer.domElement);
     controls = createControls(camera, renderer.domElement);
 
-    const { ambientLight, directionalLight } = createLights(datGUI);
+    const { ambientLight, directionalLight } = createLights();
     loop.updatables.push(controls);
     scene.add(ambientLight, directionalLight);
 
     // Helpers
     cameraHelper = createCameraHelper(directionalLight.shadow.camera);
-    datGUI = createDatGUI()
+
 
     const resizer = new Resizer(container, camera, renderer);
   }
 
   async init() {
+    datGUI = createDatGUI()
     // Camera
     controls.target.set(settings.camera.target.x, settings.camera.target.y, settings.camera.target.z);                          // Set the orbit controls target
     // Scene elements
