@@ -11,12 +11,11 @@ function createLights() {
     settings.lights.directionalLight.color,
     settings.lights.directionalLight.intensity
   );
-  settings.elements.lights.directionalLight.position.set(0, 300, 300);
   settings.elements.lights.directionalLight.castShadow = true
 
   // Set up shadow properties for the light
-  settings.elements.lights.directionalLight.shadow.mapSize.height  = 4096; 
-  settings.elements.lights.directionalLight.shadow.mapSize.width  = 4096; 
+  settings.elements.lights.directionalLight.shadow.mapSize.height  = 1024 * 3.5; 
+  settings.elements.lights.directionalLight.shadow.mapSize.width  = 1024 * 3.5; 
   settings.elements.lights.directionalLight.shadow.camera.near     = 0.5; 
   settings.elements.lights.directionalLight.shadow.camera.far      = 620; 
   settings.elements.lights.directionalLight.shadow.camera.left     = -320; 
@@ -24,6 +23,7 @@ function createLights() {
   settings.elements.lights.directionalLight.shadow.camera.top      = 250; 
   settings.elements.lights.directionalLight.shadow.camera.bottom   = -200; 
   settings.elements.lights.directionalLight.shadow.bias            = -0.0005; 
+  settings.elements.lights.directionalLight.shadow.radius            =8; 
 
   return { 
     ambientLight:     settings.elements.lights.ambientLight, 

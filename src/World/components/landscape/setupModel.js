@@ -31,13 +31,23 @@ function setupModel(data) {
       bladesAndHub002:  'gusto',
       motor002:         'gusto'
     }
+
     if(Object.keys(bladeNames).indexOf(child.name) > -1){
-      if(child.name.slice(0, 6) === 'blades'){
-        settings.wind.turbine[bladeNames[child.name]].blades = child
+
+
+
+      if(child.name.slice(0, 6) === 'blades'){    
+        if(typeof settings.elements.turbine[bladeNames[child.name]] === 'undefined'){
+          settings.elements.turbine[bladeNames[child.name]] = {} 
+        }
+        settings.elements.turbine[bladeNames[child.name]].blades = child
       }
 
       if(child.name.slice(0, 5) === 'motor'){
-        settings.wind.turbine[bladeNames[child.name]].motor = child
+        if(typeof settings.elements.turbine[bladeNames[child.name]] === 'undefined'){
+          settings.elements.turbine[bladeNames[child.name]] = {} 
+        }
+        settings.elements.turbine[bladeNames[child.name]].motor = child
       }
     }
 

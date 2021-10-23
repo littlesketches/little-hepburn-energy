@@ -38,18 +38,26 @@ const settings = {
         density:            0,
     },
     wind: {
-        direction:          0,      // Degrees from North,
-        speed:              25,     // Speed in m/s 25 > 17.1, 3.5 > 10
+        direction:          45,      // Degrees from North,
+        speed:              12,     // Speed in m/s 25 > 17.1, 3.5 > 10
+        turbine_performance: {
+            windSpeed_min:      3.5,
+            windSpeed_max:      25,
+            bladeRPM_min:       10,   
+            bladeRPM_max:       17.1   
+        },
         turbine: {
             gale: {
-                rpm:        17.1,
+                rpm:        null,
                 blades:     null,
-                motor:      null
+                motor:      null,
+                factor:     1,   // Proportional (discount) factor converting wind to blade speed 
             },
             gusto: {
-                rpm:        8.5,
+                rpm:        null,
                 blades:     null,
-                motor:      null
+                motor:      null,
+                factor:     0.9,
             }
         }
     },
@@ -62,7 +70,8 @@ const settings = {
             directionalLight:   null
         },
         flock :     null,
-        fog:        null
+        fog:        null,
+        turbine:    {},
 
     },         
     gui: {
