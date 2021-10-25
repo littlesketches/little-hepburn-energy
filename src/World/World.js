@@ -9,6 +9,7 @@ import { addPhysics }           from './components/physics.js';
 import { createCamera }         from './components/camera.js';
 import { createLights }         from './components/lights.js';
 import { createScene }          from './components/scene.js';
+import { createText }           from './components/text.js';
 
 import { createCameraHelper }    from './systems/cameraHelper.js';
 import { createControls }        from './systems/controls.js';
@@ -52,6 +53,8 @@ class World {
     const sky = createSky(world.renderer, world.scene, world.camera, datGUI);
     const landscape = await loadLandscape();
     const flock = await loadBirds();
+    const text = await createText(world.scene);
+console.log(text)
     world.scene.add( sky, landscape, flock );
 
     // Add Physics simulation

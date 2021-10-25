@@ -2,7 +2,6 @@ import { Group, Mesh, SphereGeometry, PlaneGeometry, BoxGeometry, SphereBufferGe
 import { bodyToMesh } from './threeCannonUtils.js'
 import * as CANNON from  'https://cdn.jsdelivr.net/npm/cannon-es@0.18.0/dist/cannon-es.js'
 
-
 function addPhysics(world, scene) {
   const physicsUpdatables = {}
   // Physics materials

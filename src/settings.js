@@ -6,7 +6,7 @@ let world = {}
 const settings = {
     camera: {
         type:   'perspective',
-        pos:    { x: 200 ,  y: 100,     z: -200   }, 
+        pos:    { x: -50 ,  y: 50,     z: -400   }, 
         target: { x: 0 ,    y: 20,      z: 0   }, 
         perspective: {  
             fov:        35,
