@@ -1,7 +1,8 @@
 ///////////////////////////////
-/// Global state variables  ///
+/// GLOBAL VARIABLES  ///
 ///////////////////////////////
 
+let world = {}
 const settings = {
     camera: {
         type:   'perspective',
@@ -34,7 +35,7 @@ const settings = {
         exposure:           0.7
     },
     fog: {
-        color:              '#FFFFFF',
+        color:              '#DDD',
         density:            0,
     },
     wind: {
@@ -72,17 +73,15 @@ const settings = {
         flock :     null,
         fog:        null,
         turbine:    {},
-
-    },         
+    },     
+    physics:{
+        heightData:     [],
+        objMap:         {}
+    },
     gui: {
         stats:      null
     }
-
 }
 
 const state = {
-    
-
 }
-
-let scene

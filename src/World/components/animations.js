@@ -2,19 +2,21 @@ import { Math as MathUtils } from 'https://unpkg.com/three@0.127.0/build/three.m
 
 async function createSceneAnimations(gui) {
 
-  ///  WIND TURBINE
-    // Blade rotation animation
+  // 1. WIND TURBINE
+    // a. Blade rotation animation
     settings.elements.turbine.gale.blades.tick = (elapsedTime, delta) =>  settings.elements.turbine.gale.blades.rotation.z += (delta * Math.PI * 2/ 60)  * settings.wind.turbine.gale.rpm
     settings.elements.turbine.gusto.blades.tick = (elapsedTime, delta) => settings.elements.turbine.gusto.blades.rotation.z += (delta * Math.PI * 2/ 60) * settings.wind.turbine.gusto.rpm
-    // Debug helpers to set wind conditions
+
+    // b. Add GUI helpers to set wind conditions
     const windFolder = gui.__folders["Environment controls"].addFolder('Wind controls' );
     windFolder.add( settings.wind, 'speed', 0, settings.wind.turbine_performance.windSpeed_max, 0.1 ).onChange( updateForWind )
         .name("Wind speed (m/s)")
     windFolder.add( settings.wind, 'direction', 0, 360, 0.1 ).onChange( updateForWind )
         .name("Direction (deg from north)")
-    // Method to update turbines for wind conditions
+
+    // c. Method to update turbines for wind conditions
     function updateForWind() {
-      // Set estimaated blade speed (rpm)
+      // Set estimated blade speed (rpm)
       settings.wind.turbine.gale.rpm  = settings.wind.speed >= settings.wind.turbine_performance.windSpeed_min ? windSpeedToRPM(settings.wind.turbine.gale.factor) : 0
       settings.wind.turbine.gusto.rpm = settings.wind.speed >= settings.wind.turbine_performance.windSpeed_min ? windSpeedToRPM(settings.wind.turbine.gusto.factor) : 0
       // Set blades to face direction of wind
@@ -29,7 +31,7 @@ async function createSceneAnimations(gui) {
 
     updateForWind() // Initialise
 
-  // FLOCK OF BIRDS
+  // 2.FLOCK OF BIRDS
   settings.elements.flock.tick = (elapsedTime) =>  {
     const degrees = (elapsedTime * Math.PI * 2 ) % 360, 
       radius = 200, elevationDelta = 10
@@ -40,7 +42,8 @@ async function createSceneAnimations(gui) {
     return settings.elements.flock.position
   }
 
-  // Reference to animation objects
+
+  // Return reference to animation objects
   return {
     animGaleBlades: settings.elements.turbine.gale.blades,
     animGustoBlades: settings.elements.turbine.gusto.blades,

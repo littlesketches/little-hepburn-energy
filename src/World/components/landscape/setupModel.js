@@ -1,4 +1,4 @@
-import { Group, Color } from 'https://unpkg.com/three@0.127.0/build/three.module.js';
+import { Group, Color, MeshBasicMaterial, MeshStandardMaterial } from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 
 function setupModel(data) {
   const model = new Group()
@@ -14,6 +14,18 @@ function setupModel(data) {
 
       if(child.name === 'Grass') {
         child.receiveShadow = true
+      }
+      if(child.name === 'GroundPlane') {
+        console.log(child.geometry.attributes.position.array.map(d => Math.round(d)))
+
+
+        settings.physics.heightData = child.geometry.attributes.position.array.filter((d,i) => i % 3 === 1)
+        child.material = new MeshStandardMaterial({
+          opacity:        0,
+          transparent:    true
+        })
+        child.castShadow = false
+        settings.elements.groundPlane = child
       }
     }
 
@@ -33,9 +45,6 @@ function setupModel(data) {
     }
 
     if(Object.keys(bladeNames).indexOf(child.name) > -1){
-
-
-
       if(child.name.slice(0, 6) === 'blades'){    
         if(typeof settings.elements.turbine[bladeNames[child.name]] === 'undefined'){
           settings.elements.turbine[bladeNames[child.name]] = {} 
@@ -54,8 +63,6 @@ function setupModel(data) {
     // c. Add each object to the model
     model.add(child) 
   }
-
-
 
   return model;
 }

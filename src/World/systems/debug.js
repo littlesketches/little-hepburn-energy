@@ -29,14 +29,7 @@ function createDatGUI() {
   perfStatsContainer.appendChild( settings.gui.stats.domElement);
   perfFolder.__ul.appendChild(perfLi);
 
-
-  // 2. Cinematic camera
-  // cameraFolder.add(settings.elements.camera.perspective, 'x', 1, 135, 0.01)
-  // cameraFolder.add(settings.elements.camera.perspective, 'focus', 1.8, 22, 0.01)
-
-
-
-  // 3. Add Lighting controls (with subfolders for directional and hemisphere lights)
+  // 2. Add Lighting controls (with subfolders for directional and hemisphere lights)
   const lightFolder = envFolder.addFolder('Lighting controls'),
     directionalLightFolder = lightFolder.addFolder('Directional light (sun)'),
     hemiLightFolder = lightFolder.addFolder('Ambient (hemisphere) light')
