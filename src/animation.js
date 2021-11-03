@@ -405,7 +405,7 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
                 },
                 overlay: {
                     delay:          0,
-                    duration:       8000,
+                    duration:       10000,
                     transition:     'inOut'
                 }
             }, 
