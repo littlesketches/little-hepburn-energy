@@ -146,7 +146,7 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
         '03_hepburnBattery' : {
             overlay: {
                 narrative:  {
-                    text:       "<div>We're adding solar! And we're looking into battery storage too!</div>",
+                    text:       "<div>We're adding solar!</div><br><div>And we're looking into battery storage too!</div>",
                     anchor:     'middle',
                     position:   'grid-area: 2 / 2 / 3 / 7'
                 },
