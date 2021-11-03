@@ -10,32 +10,33 @@ async function loadBirds() {
     loader.loadAsync('./assets/models/Flamingo.glb'),
     loader.loadAsync('./assets/models/Stork.glb'),
   ])
-      // Setup each bird with flight animation clip
-      const parrot1 = setupModel(parrotData);
-      const parrot2 = setupModel(parrotData);
-      const flamingo1 = setupModel(flamingoData); 
-      // const flamingo2 = setupModel(flamingoData); 
-      const stork1 = setupModel(storkData);
-      // const stork2 = setupModel(storkData);
 
-      parrot1.position.set(0, 0, 0);
-      flamingo1.position.set(-5, 0, -10);
-      stork1.position.set(5, 0, -10);
+  // Setup each bird with flight animation clip
+  const parrot1 = setupModel(parrotData);
+  const parrot2 = setupModel(parrotData);
+  const flamingo1 = setupModel(flamingoData); 
+  // const flamingo2 = setupModel(flamingoData); 
+  const stork1 = setupModel(storkData);
+  // const stork2 = setupModel(storkData);
 
-      parrot2.position.set(-10, 0, -15);
-      // flamingo2.position.set(0, 0, -15);
-      // stork2.position.set(10, 0, -15);
+  parrot1.position.set(0, 0, 0);
+  flamingo1.position.set(-5, 0, -10);
+  stork1.position.set(5, 0, -10);
 
-      // Add all birds to a flock group
-      settings.elements.flock = new Group()
-      settings.elements.flock.add(parrot1)
-      settings.elements.flock.add(parrot2)
-      settings.elements.flock.add(flamingo1)
-      // settings.elements.flock.add(flamingo2)
-      settings.elements.flock.add(stork1)
-      // settings.elements.flock.add(stork2)
+  parrot2.position.set(-10, 0, -15);
+  // flamingo2.position.set(0, 0, -15);
+  // stork2.position.set(10, 0, -15);
 
-      return settings.elements.flock
+  // Add all birds to a flock group
+  settings.elements.flock = new Group()
+  settings.elements.flock.add(parrot1)
+  settings.elements.flock.add(parrot2)
+  settings.elements.flock.add(flamingo1)
+  // settings.elements.flock.add(flamingo2)
+  settings.elements.flock.add(stork1)
+  // settings.elements.flock.add(stork2)
+
+  return settings.elements.flock
       
 }
 

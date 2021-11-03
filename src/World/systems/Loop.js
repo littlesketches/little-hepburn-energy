@@ -26,27 +26,31 @@ class Loop {
   }
 
   tick() {
-    // Clock
+    // 0. Clock/time variables
     const elapsedTime = clock.getElapsedTime(),
       currentTime = Date.now(), 
       delta = currentTime - time, 
       deltaTime = elapsedTime - oldElapsedTime    // Previous frame delta for physics timer
-    // Update time and oldElapsed time
-    time = currentTime     
+   
+    time = currentTime                    
     oldElapsedTime = elapsedTime
 
-
-    //  Update physics world objects
-    this.physicsWorld.step( 1 / 60, deltaTime, 6 ) // 60fps and 3 frame catchup
-    for (const obj of Object.values(this.physicsUpdatables) ){
-      obj.mesh.position.copy(obj.body.position)  
+    // 1. Update physics world simulation
+    if(settings.options.simulatePhysics) {
+      this.physicsWorld.step( 1 / 60, deltaTime, 6 )      // 60fps and 3 frame catchup
+      for (const obj of Object.values(this.physicsUpdatables) ){
+        if(obj.dof.x) obj.mesh.position.x = obj.body.position.x
+        if(obj.dof.z) obj.mesh.position.z = obj.body.position.z
+        if(obj.dof.y) obj.mesh.position.y = obj.body.position.y
+      }
     }
-    // Update ThreeJS objects
+    // 2. Update scene (ThreeJS) objects
     for (const object of this.updatables) {
-      object.tick(elapsedTime, delta/1000);
+      if(typeof(object.tick) !== 'undefined')  object.tick(elapsedTime, delta / 1000)
+      if(typeof(object.update) !== 'undefined')  object.update(delta / 1000)
     }
 
-
+    // 3. Update the monitoring
     settings.gui.stats.update()
   }
 }

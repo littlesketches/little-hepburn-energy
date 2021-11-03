@@ -2,31 +2,22 @@ import { Group, Color, MeshBasicMaterial, MeshStandardMaterial } from 'https://u
 
 function setupModel(data) {
   const model = new Group()
-    model.name = 'Landscape group'
-
-  const children = [...data.scene.children] 
+  model.name = 'Model group'
+  const children = [...data.scene.children]
 
   /// CONFIGURE AND ADD ALL OBJECTS 
-  // a. Set up shadows by object and objects that are in groups
+  // a. Set up shadows by object (meshes, meshes in paths / applied modifiers in Object3Ds) and objects that are in groups
   for (const child of children){
     if(child.type === 'Mesh'){
       child.castShadow = true
-
-      if(child.name === 'Grass') {
+      if(child.name === 'Grass' || child.name === 'Carpark-01' || child.name === 'Carpark-02' ) {
+        child.castShadow = false
         child.receiveShadow = true
       }
-      if(child.name === 'GroundPlane') {
-        console.log(child.geometry.attributes.position.array.map(d => Math.round(d)))
+    }
 
-
-        settings.physics.heightData = child.geometry.attributes.position.array.filter((d,i) => i % 3 === 1)
-        child.material = new MeshStandardMaterial({
-          opacity:        0,
-          transparent:    true
-        })
-        child.castShadow = false
-        settings.elements.groundPlane = child
-      }
+    if(child.name === 'Track-path'|| child.name === 'RoadPath-01' ||child.name === 'RoadPath-02' ){
+      child.children[0].receiveShadow = true
     }
 
     if(child.type === 'Group' ){
@@ -60,7 +51,15 @@ function setupModel(data) {
       }
     }
 
-    // c. Add each object to the model
+    // c. Store solar array items
+    if(child.name.slice(0, 11) === 'solar-array') settings.elements.solar.arrays.push(child)
+    if(child.name === 'solar-fence')  settings.elements.solar.fence = child
+    if(child.name === 'power-station-solar')  settings.elements.solar.station = child
+
+    // d. Store storage array items
+    if(child.name === 'battery-storage')  settings.elements.storage.battery = child
+    if(child.name === 'power-station-storage')  settings.elements.storage.station = child
+    // e. Add each object to the model
     model.add(child) 
   }
 

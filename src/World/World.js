@@ -9,10 +9,11 @@ import { addPhysics }           from './components/physics.js';
 import { createCamera }         from './components/camera.js';
 import { createLights }         from './components/lights.js';
 import { createScene }          from './components/scene.js';
-import { createText }           from './components/text.js';
+import { addLandscapeText }     from './components/text.js';
 
 import { createCameraHelper }    from './systems/cameraHelper.js';
 import { createControls }        from './systems/controls.js';
+
 import { createDatGUI }          from './systems/debug.js';
 import { createRenderer }        from './systems/renderer.js';
 import { createPhysicsWorld }    from './components/physicsWorld.js';
@@ -27,10 +28,10 @@ class World {
     world.camera = createCamera();
     world.renderer = createRenderer();
     world.scene = createScene();
-    world.physicsWorld =  createPhysicsWorld(world.scene);
+    if(settings.options.simulatePhysics) world.physicsWorld =  createPhysicsWorld(world.scene);
     world.loop = new Loop( world.camera,  world.scene,  world.renderer,  world.physicsWorld);
-    world.controls = createControls( world.camera,  world.renderer.domElement);
-
+    world.controls = settings.camera.controlType === 'orbit' ? createControls( world.camera,  world.renderer.domElement) : createCameraControls(world.camera,  world.renderer.domElement)
+    
     container.append( world.renderer.domElement);
 
     const { ambientLight, directionalLight } = createLights();
@@ -44,26 +45,34 @@ class World {
 
   async init() {
     console.log('Init scene')
-    datGUI = createDatGUI()
-    // Camera
-    world.controls.target.set(settings.camera.target.x, settings.camera.target.y, settings.camera.target.z);                          // Set the orbit controls target
+    world.datGUI = createDatGUI()
+    world.datGUI.hide()
+    // Camera: Initial target
+    if(settings.camera.controlType === 'orbit'){
+      world.controls.target.set(settings.camera.target.x, settings.camera.target.y, settings.camera.target.z);                         
+    } else if(settings.camera.controlType === 'cameraControls') {
+      world.controls.setTarget(settings.camera.target.x, settings.camera.target.y, settings.camera.target.z);                         
+
+    }
 
     // Add scene elements
-    addFog(world.scene, datGUI)   
-    const sky = createSky(world.renderer, world.scene, world.camera, datGUI);
+    addFog(world.scene, world.datGUI)   
+
+    world.sky = createSky(world.renderer, world.scene, world.camera, world.datGUI);
     const landscape = await loadLandscape();
     const flock = await loadBirds();
-    const text = await createText(world.scene);
-console.log(text)
-    world.scene.add( sky, landscape, flock );
+
+    world.scene.add( world.sky, landscape, flock );
 
     // Add Physics simulation
-    world.loop.physicsUpdatables = await addPhysics(world.physicsWorld,  world.scene)
-    
+    if(settings.options.simulatePhysics) world.loop.physicsUpdatables = await addPhysics(world.physicsWorld,  world.scene)
+    const landscapeText = await addLandscapeText(world.scene, world.physicsWorld, world.loop.physicsUpdatables);
+
     // Add objects to animation loop (updatables)
-    const { animGaleBlades, animGustoBlades, animFlock} = await createSceneAnimations(datGUI);
+    const { animGaleBlades, animGustoBlades, animFlock} = await createSceneAnimations(world.datGUI);
     world.loop.updatables.push( animFlock, animGaleBlades, animGustoBlades );
     for (const bird of flock.children) { world.loop.updatables.push(bird) }  
+
   };
 
   render() {

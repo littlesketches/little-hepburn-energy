@@ -13,6 +13,7 @@ function createSky(renderer, scene, camera, gui) {
     /// GUI Default settings  
     function guiChanged() {
       const uniforms = sky.material.uniforms;
+
       uniforms[ 'turbidity' ].value = settings.sky.turbidity;
       uniforms[ 'rayleigh' ].value = settings.sky.rayleigh;
       uniforms[ 'mieCoefficient' ].value = settings.sky.mieCoefficient;
