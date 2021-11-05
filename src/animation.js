@@ -36,7 +36,7 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
             }, 
             timing:        {
                 scene: {
-                    duration:       1000
+                    duration:       1500
                 },
                 overlay: {
                     delay:          0,
@@ -81,7 +81,7 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
         '01_opening_a' : {
             overlay: {
                 narrative:  {
-                    text:       "<div>And now to support our shire's transition to 100% net zero energy by 2025 - we're making some changes!</div>",
+                    text:       "<div>And now to support our shire's transition to zero net emissions - we're making some changes!</div>",
                     anchor:     'middle',
                     position:   'grid-area: 4 / 2 / 5 / 7'
                 }
@@ -231,7 +231,7 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
                     transition:     'inOut'
                 },
                 logo: {
-                    delay:          1500
+                    delay:          2000
                 }
             },
             camera: {      
@@ -241,7 +241,7 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
         '06_newProduct' : {
             overlay: {
                 narrative:  {
-                    text:       "<div>To celebrate we're launching an innovative new community retailing offer</div>",
+                    text:       "<div>And we're launching an innovative new community retailing offer</div>",
                     anchor:     'middle',
                     position:   'grid-area: 6 / 2 / 8 / 7'
                 },
@@ -273,7 +273,7 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
                     position:   'grid-area: 6 / 1 / 7 / 8'
                 },
                 narrative:  {
-                    text:       "<div>We're partnering with Flow Power to provide a new way to buy low cost, local renewable electricity</div>",
+                    text:       "<div>We're partnering with Flow Power so you can buy low cost, local renewable energy!</div>",
                     anchor:     'middle',
                     position:   'grid-area: 6 / 2 / 8 / 7'
                 },
@@ -297,11 +297,10 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
                 target:     {x: 0, y: 30, z: 0}
             }            
         },
-        '08_productDetails-1' : {
+        '08_productEOI' : {
             overlay: {
                 narrative:  {
-                    text:       "<div>This product is available to residents, businesses, commercial and industrial customers</div>",
-                    anchor:     'middle',
+                    text:       "<div>Express your interest now – offer coming in early 2022</div>",
                     position:   'grid-area: 6 / 2 / 8 / 7'
                 },
                 logo: {
@@ -312,11 +311,11 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
             },
             timing: {
                 scene: {
-                    duration:       8000
+                    duration:       6500
                 },
                 overlay: {
                     delay:          0,
-                    duration:       6000,
+                    duration:       5000,
                     transition:     'inOut'
                 }
             },
@@ -324,89 +323,27 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
                 target:     {x: 0, y: 30, z: 0}
             }            
         },
-        '09_productDetails-2' : {
-            overlay: {
-                narrative:  {
-                    text:       "<div>You’ll be connected to our generation via the new app/platform</div>",
-                    anchor:     'middle',
-                    position:   'grid-area: 6 / 2 / 8 / 7'
-                },
-                logo: {
-                    position:           'top',
-                    visible_he:          true,
-                    visible_fp:          true
-                }
-            },
-            timing: {
-                scene: {
-                    duration:       8000
-                },
-                overlay: {
-                    delay:          0,
-                    duration:       6000,
-                    transition:     'inOut'
-                }
-            },
-            camera: {      
-                target:     {x: 0, y: 30, z: 0}
-            }    
-        },
-        '10_productDetails-3' : {
-            overlay: {
-                narrative:  {
-                    text:       "<div>Not a great fan of technology? You’ll still get a great rate as our standard prices reward you for our shire’s abundant renewable energy</div>",
-                    anchor:     'middle',
-                    position:   'grid-area: 6 / 2 / 8 / 7'
-                },
-                logo: {
-                    position:           'top',
-                    visible_he:          true,
-                    visible_fp:          true
-                }
-            },
-            timing: {
-                scene: {
-                    duration:       8000
-                },
-                overlay: {
-                    delay:          0,
-                    duration:       6000,
-                    transition:     'inOut'
-                }
-            },
-            environment: {
-                turbidity:          20,
-                rayleigh:           4,
-                mieCoefficient:     0.001,
-                mieDirectionalG:    1,
-                exposure:           0.2,
-                fogDensity:         settings.fog.density
-            }, 
-            camera: {      
-                target:     {x: 0, y: 30, z: 0}
-            }    
-        },
-        '10_moreInformation' : {
+        '09_moreInformation' : {
             overlay: {
                 narrative:      {
                     text:       '<div>Find out more at www.hepburnwind.com.au</div> ',
                     anchor:     'middle',
-                    position:   'grid-area: 6 / 1 / 7 / 8'
+                    position:   'grid-area: 7 / 1 / 8 / 8'
                 },
                 logo: {
-                    position:           'center',
+                    position:           'top',
                     visible_he:         true,
                     visible_fp:         true
                 }
             },
             timing: {
                 scene: {
-                    duration:       10000
+                    duration:       6000
                 },
                 overlay: {
                     delay:          0,
-                    duration:       10000,
-                    transition:     'inOut'
+                    duration:       5000,
+                    transition:     'in'
                 }
             }, 
             camera: {      
@@ -657,14 +594,13 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
         }
     }
 
-
+// Build the animation
 direction.methods.calculateCameraPath()
 direction.methods.buildAnimation()
 
 // KEYBOARD EVENT LISTENERS (FOR TESTING)
 document.addEventListener("keydown", (event) => {
     // handle keydown
-
     switch (event.keyCode){
         case 16:
             world.animation.tl.restart() 
@@ -677,8 +613,8 @@ document.addEventListener("keydown", (event) => {
             }
            
             break
-        case 72:
-
+        case 17:
+            world.controls.enabled = !world.controls.enabled
             break
         case 83:    // "s"
             direction.methods.toggleSolar()
