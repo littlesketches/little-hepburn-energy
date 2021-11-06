@@ -9,7 +9,7 @@ async function addLandscapeText(scene, physicsWorld, physicsUpdatables) {
   fontLoader.load(
     // '../../../assets/fonts/helvetiker_regular.typeface.json',
     // '../../../assets/fonts/MaisonNeue-MonoRegular.json',
-    '../../../assets/fonts/MaisonNeue-Medium.json',
+    '../../../assets/fonts/MaisonNeue_Medium.json',
     async (font) => {
       await renderText(font)
       return landscapeText
