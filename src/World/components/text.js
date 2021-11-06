@@ -7,9 +7,9 @@ async function addLandscapeText(scene, physicsWorld, physicsUpdatables) {
     wpQuaternion = new Quaternion();
   const fontLoader = new FontLoader()
   fontLoader.load(
-    '../../../assets/fonts/helvetiker_regular.typeface.json',
-    // '../../../assets/fonts/MaisonNeue-MonoRegular.json',
-    // '../../../../assets/fonts/MaisonNeue-Medium.json',
+    // './assets/fonts/helvetiker_regular.typeface.json',
+    // './assets/fonts/MaisonNeue-MonoRegular.json',
+    './assets/fonts/MaisonNeue-Medium.json',
     async (font) => {
 console.log(font)
       await renderText(font)
