@@ -10,7 +10,7 @@ function setupModel(data) {
   for (const child of children){
     if(child.type === 'Mesh'){
       child.castShadow = true
-      if(child.name === 'Grass' || child.name === 'Carpark-01' || child.name === 'Carpark-02' ) {
+      if(child.name === 'Grass' || child.name === 'Carpark-01' || child.name === 'Carpark-02' || child.name === 'Pond-water' ) {
         child.castShadow = false
         child.receiveShadow = true
       }
@@ -59,8 +59,15 @@ function setupModel(data) {
     // d. Store storage array items
     if(child.name === 'battery-storage')  settings.elements.storage.battery = child
     if(child.name === 'power-station-storage')  settings.elements.storage.station = child
-    // e. Add each object to the model
-    model.add(child) 
+
+    // e. Add each object to the model UNLESS from an excluded list
+    const northRoadObjs = ['RoadPath-02', 'Powerline-02-a', 'Powerline-02-b', 'electrical-poles-north']
+    if(settings.options.showNorthRoad === false && northRoadObjs.indexOf(child.name) === -1){
+      model.add(child) 
+    } else if(settings.options.showNorthRoad){
+      model.add(child) 
+    } 
+
   }
 
   return model;

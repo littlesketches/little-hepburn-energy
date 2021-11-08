@@ -11,7 +11,6 @@ async function addLandscapeText(scene, physicsWorld, physicsUpdatables) {
     // './assets/fonts/MaisonNeue-MonoRegular.json',
     './assets/fonts/MaisonNeue-Medium.json',
     async (font) => {
-console.log(font)
       await renderText(font)
       return landscapeText
     }
@@ -21,9 +20,9 @@ console.log(font)
     const textMaterial = new MeshNormalMaterial()     // Material used for all text 3D text
     const textObjects = [
       {     
-        text:           'COMMUNITY ENERGY',             // Full text string
-        position:       {x: 100,  y: 1, z: -210},
-        rotation:       {x: 0,  y:  Math.PI * 1.0 , z: 0},
+        text:           'LITTLE HEPBURN ENERGY',             // Full text string
+        position:       {x: 150,  y: 1, z: -230},
+        rotation:       {x: 0,   y: Math.PI * 1.0 , z: 0},
         prop:           'mainTitle',                 // Reference to text properties object
       },
     ]
@@ -82,6 +81,7 @@ console.log(font)
 
         } else { // Add a space
           startX += textProperties[obj.prop].size
+          letterWidths.push(5)  // Add a letter width for the space
         }
       }
       // Position text group and add to scene

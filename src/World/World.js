@@ -20,18 +20,17 @@ import { createPhysicsWorld }    from './components/physicsWorld.js';
 import { Resizer }               from './systems/Resizer.js';
 import { Loop }                  from './systems/Loop.js';
 
-
 let cameraHelper, datGUI;
 
 class World {
   constructor(container) {
+
     world.camera = createCamera();
     world.renderer = createRenderer();
     world.scene = createScene();
     if(settings.options.simulatePhysics) world.physicsWorld =  createPhysicsWorld(world.scene);
     world.loop = new Loop( world.camera,  world.scene,  world.renderer,  world.physicsWorld);
-    world.controls = settings.camera.controlType === 'orbit' ? createControls( world.camera,  world.renderer.domElement) : createCameraControls(world.camera,  world.renderer.domElement)
-    
+    world.controls = createControls( world.camera,  world.renderer.domElement) 
     container.append( world.renderer.domElement);
 
     const { ambientLight, directionalLight } = createLights();
@@ -44,16 +43,10 @@ class World {
   }
 
   async init() {
-    console.log('Init scene')
     world.datGUI = createDatGUI()
     world.datGUI.hide()
     // Camera: Initial target
-    if(settings.camera.controlType === 'orbit'){
-      world.controls.target.set(settings.camera.target.x, settings.camera.target.y, settings.camera.target.z);                         
-    } else if(settings.camera.controlType === 'cameraControls') {
-      world.controls.setTarget(settings.camera.target.x, settings.camera.target.y, settings.camera.target.z);                         
-
-    }
+    world.controls.target.set(settings.camera.target.x, settings.camera.target.y, settings.camera.target.z);                         
 
     // Add scene elements
     addFog(world.scene, world.datGUI)   
@@ -65,9 +58,10 @@ class World {
     world.scene.add( world.sky, landscape, flock );
 
     // Add Physics simulation
-    if(settings.options.simulatePhysics) world.loop.physicsUpdatables = await addPhysics(world.physicsWorld,  world.scene)
-    const landscapeText = await addLandscapeText(world.scene, world.physicsWorld, world.loop.physicsUpdatables);
-
+    if(settings.options.simulatePhysics){
+      world.loop.physicsUpdatables = await addPhysics(world.physicsWorld,  world.scene)
+      if(settings.options.show3dText) addLandscapeText(world.scene, world.physicsWorld, world.loop.physicsUpdatables);
+    }
     // Add objects to animation loop (updatables)
     const { animGaleBlades, animGustoBlades, animFlock} = await createSceneAnimations(world.datGUI);
     world.loop.updatables.push( animFlock, animGaleBlades, animGustoBlades );

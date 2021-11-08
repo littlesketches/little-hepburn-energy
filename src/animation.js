@@ -457,16 +457,6 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
                     }, null, sceneStart  +  logoDelay)
                 }
 
-                // Title
-                if(sceneObj.overlay.title){
-                    world.animation.tl.call( () => {
-                        const title = document.querySelector('.title')
-                        title.classList.remove('hidden')
-                        title.setAttribute("style", sceneObj.overlay.title.position)
-                        title.innerHTML = sceneObj.overlay.title.text
-                    }, null, sceneStart  + overlayDelay)
-                }
-
                 // Narrative
                 if(sceneObj.overlay.narrative){
                     const narrative = document.querySelector('.narrative')
@@ -571,8 +561,6 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
             }
         },
         buildAnimation(){
-            // for( const logoEl of document.querySelectorAll('.logo')) { logoEl.classList.add('hidden') }
-
             world.animation.tl.clear()
             world.animation.tl.call( () => {
                 document.querySelector('.overlay-background').classList.add('black')
@@ -589,31 +577,73 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
                 direction.methods.addSceneOverlay(name)     
             })
 
-
             world.animation.tl.pause()
         }
     }
 
 // Build the animation
 direction.methods.calculateCameraPath()
-direction.methods.buildAnimation()
+// direction.methods.buildAnimation()
 
-// KEYBOARD EVENT LISTENERS (FOR TESTING)
+// KEYBOARD EVENT LISTENERS (FOR TESTING ANIMATION)
 document.addEventListener("keydown", (event) => {
+console.log(event.keyCode)
     // handle keydown
     switch (event.keyCode){
-        case 16:
-            world.animation.tl.restart() 
-            break
-        case 32:
-            if(world.animation.tl.isActive()) {
-                world.animation.tl.pause()
-            } else{
-                world.animation.tl.play() 
+        case 65:        // Toggle animation mode
+            if(!settings.options.animationMode){    // Clear the animation settings
+                for(const el of document.querySelectorAll('.he-logo')){ el.classList.add('hidden') }
+                direction.methods.buildAnimation()
+            } else {                             // Clear the animation settings
+                world.animation.tl.clear()
+                document.querySelector('.narrative').classList.add('exit-bottom')
+                document.querySelector('.logo-container').className = 'logo-container'
+                document.querySelector('.fp-logo').classList.add('hidden') 
+                gsap.to( world.camera.position, {
+                        duration: 2,
+                        x: settings.camera.pos.x, 
+                        y: settings.camera.pos.y, 
+                        z: settings.camera.pos.z 
+                    }
+                )
+                gsap.to( world.controls.target, {
+                        duration: 2,
+                        x: settings.camera.target.x, 
+                        y: settings.camera.target.y, 
+                        z: settings.camera.target.z 
+                    }
+                )
+                // Reset environment
+                gsap.to(world.sky.material.uniforms.turbidity, { duration: 2, value: settings.sky.turbidity })
+                gsap.to(world.sky.material.uniforms.rayleigh, { duration: 2, value: settings.sky.rayleigh  })
+                gsap.to(world.sky.material.uniforms.mieCoefficient, { duration: 2, value: settings.sky.mieCoefficient  })
+                gsap.to(world.sky.material.uniforms.mieDirectionalG, { duration: 2, value: settings.sky.mieDirectionalG  })
+                gsap.to(world.renderer, {duration: 2,toneMappingExposure: settings.sky.exposure  })
+                gsap.to(world.scene.fog, {duration: 2, density: settings.fog.density  })
+                // Reset solar and battery
+                settings.elements.solar.visible = false
+                settings.elements.storage.visible = false
+                direction.methods.toggleSolar()
+                direction.methods.toggleStorage()
             }
-           
+
+            settings.options.animationMode = !settings.options.animationMode
             break
-        case 17:
+        case 32:        // Space to start / pause animation
+            if(settings.options.animationMode){
+                if(world.animation.tl.isActive()) {
+                    world.animation.tl.pause()
+                } else{
+                    world.animation.tl.play() 
+                }
+            }
+            break
+        case 16:        // Shift to restart animation
+            if(settings.options.animationMode){
+                world.animation.tl.restart() 
+            }
+            break
+        case 79:    // "o" to toggle orbit controls
             world.controls.enabled = !world.controls.enabled
             break
         case 83:    // "s"

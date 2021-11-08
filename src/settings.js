@@ -1,6 +1,6 @@
-/////////////////////////
-/// GLOBAL VARIABLES  ///
-/////////////////////////
+//////////////////////////////////
+/// INITIATE GLOBAL VARIABLES  ///
+//////////////////////////////////
 
 // Global object for storing the scene
 const world = {}
@@ -8,7 +8,6 @@ const direction = {}
 // Global object for settings and references
 const settings = {
     camera: {
-        controlType:    'orbit',        // 'orbit' or 'cameraControls'
         type:           'perspective',
         pos:            { x: -120 ,  y: 80,     z: -200   }, 
         target:         { x: 0 ,    y: 50,      z: 0   }, 
@@ -103,10 +102,14 @@ const settings = {
         showAnimationCam:   false,
     },    
     options: {
-       simulatePhysics:     true,
+        simulatePhysics:    true,
+        showNorthRoad:      true,
+        show3dText:         true,
+        animationMode:      false
     }
 }
  
+// Heightfield surface data manually extracted from model and used for physics ground plane
 const heightfield = {
     sceneWidth:     500,
     matrix: [  // Manually constructed height matrix, setup to be square 15 x 15
@@ -188,28 +191,19 @@ const heightfield = {
     ]
 }
 
-function getTerrainHeightAt(xPos, yPos, heightmap = heightfield.matrix, tilesize = heightfield.elSize, center = {x: -heightfield.sceneWidth * 0.5, y: -heightfield.sceneWidth * 0.5}){		
-    const x = Math.floor((xPos - center.x) / tilesize),
-        y = Math.floor((yPos - center.y) / tilesize),
-            xPlusOne = x + 1,
-        yPlusOne = y + 1,            
-        triY0 = heightmap[x][y],
-        triY1 = heightmap[xPlusOne][y],
-        triY2 = heightmap[x][yPlusOne],
-        triY3 = heightmap[xPlusOne][yPlusOne],
-        sqX = (xPos / tilesize) - x,
-        sqY = (yPos / tilesize) - y;
-            
-    let height = 0.0
-                    
-    if ((sqX + sqY) < 1) {
-        height = triY0;
-        height += (triY1 - triY0) * sqX;
-        height += (triY2 - triY0) * sqY;
-    } else {
-        height = triY3;
-        height += (triY1 - triY3) * (1.0 - sqY);
-        height += (triY2 - triY3) * (1.0 - sqX);
+
+//////////////////////////////////////////////
+/// APPLYICATION OF QUERY STRING SETTINGS  ///
+////////////////////////////////////////////
+
+applyQuerySettings()
+
+function applyQuerySettings(){
+    const params = new URLSearchParams(window.location.search)
+    if (params.has('showNorthRoad')) { 
+        settings.options.showNorthRoad = params.get('showNorthRoad') === 'true' ? true : false
     }
-    return height;
-}
+    if (params.has('show3dText')) { 
+        settings.options.show3dText = params.get('show3dText') === 'true' ? true : false
+    }
+};
