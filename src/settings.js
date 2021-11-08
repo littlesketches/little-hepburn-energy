@@ -97,7 +97,7 @@ const settings = {
         stats:      null
     },
     debug: {
-        showGUI:            false,
+        showGUI:            true,
         showHeightfield:    false,
         showAnimationCam:   false,
     },    
@@ -205,5 +205,8 @@ function applyQuerySettings(){
     }
     if (params.has('show3dText')) { 
         settings.options.show3dText = params.get('show3dText') === 'true' ? true : false
+    }
+    if (params.has('gui')) { 
+        settings.debug.showGUI = params.get('gui') === 'true' ? true : false
     }
 };

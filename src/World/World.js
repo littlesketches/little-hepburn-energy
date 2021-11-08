@@ -44,7 +44,7 @@ class World {
 
   async init() {
     world.datGUI = createDatGUI()
-    world.datGUI.hide()
+    if(!settings.debug.showGUI)  world.datGUI.hide()
     // Camera: Initial target
     world.controls.target.set(settings.camera.target.x, settings.camera.target.y, settings.camera.target.z);                         
 
