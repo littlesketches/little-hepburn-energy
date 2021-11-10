@@ -491,8 +491,7 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
         },
         toggleSolar(duration = 3, solarArrays = settings.elements.solar.arrays, fence = settings.elements.solar.fence, station = settings.elements.solar.station){
             const solarObjects = solarArrays.concat(fence).concat(station),
-                yOffset = settings.elements.solar.visible ? "-=2.75" : "+=2.75" 
-
+                yOffset = settings.elements.solar.visible ? "-=3" : "+=3" 
             for( const obj of solarObjects) {
                 gsap.to( obj.position, {
                     duration: duration,
@@ -504,7 +503,7 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
         },
         toggleStorage(duration = 3, battery = settings.elements.storage.battery, station = settings.elements.storage.station){
             const storageObjects = [battery].concat(station),
-                yOffset = settings.elements.storage.visible ? "-=4.75" : "+=4.75" 
+                yOffset = settings.elements.storage.visible ? "-=5" : "+=5" 
 
             for( const obj of storageObjects) {
                 gsap.to( obj.position, {
