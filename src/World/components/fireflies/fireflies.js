@@ -36,7 +36,7 @@ const firefliesFragmentShader = `
 async function createFireflies(datGUI) {
   // Geometry
   const firefliesGeometry = new BufferGeometry()
-  const firefliesCount = 10000
+  const firefliesCount = 5000
   const positionArray = new Float32Array(firefliesCount * 3)
   const scaleArray = new Float32Array(firefliesCount)
 

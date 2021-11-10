@@ -136,3 +136,55 @@ function applyQuerySettings(){
         settings.debug.showGUI = params.get('gui') === 'true' ? true : false
     }
 };
+
+
+// fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=-37.4249805&lon=144.116305&appid=2292652bd18a98be70e21278e4c01da5`)
+//   .then(response => response.json())
+//   .then(data => console.log(data));
+
+const weatherObj = {
+    "coord": {
+        "lon": 144.1163,
+        "lat": -37.425
+    },
+    "weather": [
+        {
+            "id": 801,
+            "main": "Clouds",
+            "description": "few clouds",
+            "icon": "02n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 5.96,
+        "feels_like": 4.06,
+        "temp_min": 5.1,
+        "temp_max": 6.15,
+        "pressure": 1011,
+        "humidity": 86,
+        "sea_level": 1011,
+        "grnd_level": 927
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 2.47,
+        "deg": 198,
+        "gust": 7.65
+    },
+    "clouds": {
+        "all": 20
+    },
+    "dt": 1636543276,
+    "sys": {
+        "type": 2,
+        "id": 2003214,
+        "country": "AU",
+        "sunrise": 1636484913,
+        "sunset": 1636535183
+    },
+    "timezone": 39600,
+    "id": 2160341,
+    "name": "Leonards Hill",
+    "cod": 200
+}
