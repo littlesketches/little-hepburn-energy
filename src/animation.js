@@ -2,10 +2,18 @@ import { gsap } from "https://unpkg.com/gsap@3.8.0/src/gsap-core.js";
 import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, SphereBufferGeometry, MeshBasicMaterial, Mesh, Sphere } from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 
 
-////////////////////////////////
-/// HEPBURN ENERGY STORY    ////
-////////////////////////////////
+/////////////////////////////////////////
+///         Module for                ///
+/// HEPBURN ENERGY STORY ANIMATION    ///
+/// --------------------------------- ///
+/// GSAP powered camera and overlay   ///
+/// animation sequence, with a few    ///
+/// basic keyboard options to play    ///
+///                                   ///
+/////////////////////////////////////////
 
+
+// Initiate global variables including direction content and methods
     world.animation = {
         tl:  gsap.timeline()
     }
@@ -581,21 +589,22 @@ import { Vector3, CatmullRomCurve3, BufferGeometry,  LineBasicMaterial, Line, Sp
         }
     }
 
-// Build the animation
+// 1. Build the animation
 direction.methods.calculateCameraPath()
 // direction.methods.buildAnimation()
 
-// KEYBOARD EVENT LISTENERS (FOR TESTING ANIMATION)
+// 2. Add Keyboard event listeners for controls in 'animation mode'
 document.addEventListener("keydown", (event) => {
-console.log(event.keyCode)
     // handle keydown
     switch (event.keyCode){
         case 65:        // Toggle animation mode
-            if(!settings.options.animationMode){    // Clear the animation settings
+            if(!settings.options.animationMode){    // Build the animation and ready for play
                 for(const el of document.querySelectorAll('.he-logo')){ el.classList.add('hidden') }
+                world.datGUI.hide()
                 direction.methods.buildAnimation()
             } else {                             // Clear the animation settings
                 world.animation.tl.clear()
+                world.datGUI.show()
                 document.querySelector('.narrative').classList.add('exit-bottom')
                 document.querySelector('.logo-container').className = 'logo-container'
                 document.querySelector('.fp-logo').classList.add('hidden') 

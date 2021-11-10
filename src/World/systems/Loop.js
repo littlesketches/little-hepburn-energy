@@ -11,6 +11,7 @@ class Loop {
     this.renderer = renderer;
     this.physicsWorld = physicsWorld;
     this.updatables = [];
+    this.shaderUpdatables = [];
     this.physicsUpdatables = [];
   }
 
@@ -49,7 +50,10 @@ class Loop {
       if(typeof(object.tick) !== 'undefined')  object.tick(elapsedTime, delta / 1000)
       if(typeof(object.update) !== 'undefined')  object.update(delta / 1000)
     }
-
+    // 2. Update scene (ThreeJS) shader uniforms
+    for (const object of this.shaderUpdatables) {
+      object.uniforms.uTime.value = elapsedTime
+    }
     // 3. Update the monitoring
     settings.gui.stats.update()
   }

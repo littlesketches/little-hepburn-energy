@@ -21,7 +21,7 @@ async function addLandscapeText(scene, physicsWorld, physicsUpdatables) {
     const textObjects = [
       {     
         text:           'LITTLE HEPBURN ENERGY',             // Full text string
-        position:       {x: 150,  y: 1, z: -230},
+        position:       {x: 150,  y: 1, z: -235},
         rotation:       {x: 0,   y: Math.PI * 1.0 , z: 0},
         prop:           'mainTitle',                 // Reference to text properties object
       },
@@ -104,14 +104,6 @@ async function addLandscapeText(scene, physicsWorld, physicsUpdatables) {
           bbox_z = bbox.max.z - bbox.min.z
 
         // Add each char to scene in world position
-        // Test box
-        // const testBoxGeometry = new BoxGeometry(1, 1, 1)
-        // const testBox = new Mesh(testBoxGeometry,  testMaterial   )
-        // testBox.scale.set(bbox_x, bbox_y, bbox_z) 
-        // testBox.position.set(worldPos.x, worldPos.y, worldPos.z) 
-        // testBox.quaternion.set( worldQuat.x, worldQuat.y, worldQuat.z, worldQuat.w) 
-        // scene.add(testBox)
-
         textGroupToAdd.add(mesh)
         mesh.position.set(worldPos.x, worldPos.y, worldPos.z) 
         mesh.quaternion.set( worldQuat.x, worldQuat.y, worldQuat.z, worldQuat.w) 

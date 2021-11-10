@@ -1,7 +1,9 @@
-import { Group, Mesh, SphereGeometry, PlaneGeometry, BoxGeometry, SphereBufferGeometry, CylinderGeometry, BufferGeometry,  MeshBasicMaterial, MeshStandardMaterial, Vector3 } from 'https://unpkg.com/three@0.127.0/build/three.module.js';
+import { Group, Mesh, SphereGeometry, PlaneGeometry, BoxGeometry, SphereBufferGeometry, CylinderGeometry, BufferGeometry,  MeshBasicMaterial, MeshStandardMaterial, Vector3} from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 import { bodyToMesh } from './threeCannonUtils.js'
 import * as CANNON from  'https://cdn.jsdelivr.net/npm/cannon-es@0.18.0/dist/cannon-es.js'
 
+
+// Function to add physics components
 function addPhysics(world, scene) {
   const physicsUpdatables = {}
 
@@ -47,9 +49,6 @@ function addPhysics(world, scene) {
     material:   settings.physics.material.default
   })
 
-  // scene.add(sphere)
-  // world.addBody(sphereBody)
-
 
   // 1. Construct heightfield for ground
   const heightfieldPoints_X = heightfield.matrix.length,
@@ -80,7 +79,7 @@ function addPhysics(world, scene) {
   // Add heightfield mesh for scene testing: requires renderer to use THREE.JS build 122
   if(settings.debug.showHeightfield){
     const mesh = bodyToMesh(heightfieldBody, defaultMeshMaterial)
-    mesh.position.y = 3
+    mesh.position.y = 0
     scene.add(mesh)
   }
 

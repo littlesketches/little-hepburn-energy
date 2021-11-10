@@ -1,15 +1,16 @@
-import { CameraHelper }         from 'https://unpkg.com/three@0.127.0/build/three.module.js';
+import { CameraHelper }          from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 
-import { loadBirds }            from './components/birds/birds.js';
-import { loadLandscape }        from './components/landscape/landscape.js';
-import { createSceneAnimations} from './components/animations.js';
-import { createSky }            from './components/sky.js';
-import { addFog }               from './components/fog.js';
-import { addPhysics }           from './components/physics.js';
-import { createCamera }         from './components/camera.js';
-import { createLights }         from './components/lights.js';
-import { createScene }          from './components/scene.js';
-import { addLandscapeText }     from './components/text.js';
+import { loadBirds }             from './components/birds/birds.js';
+import { loadLandscape }         from './components/landscape/landscape.js';
+import { createSceneAnimations}  from './components/animations.js';
+import { createSky }             from './components/sky.js';
+import { addFog }                from './components/fog.js';
+import { addPhysics }            from './components/physics.js';
+import { createCamera }          from './components/camera.js';
+import { createLights }          from './components/lights.js';
+import { createScene }           from './components/scene.js';
+import { createFireflies }       from './components/fireflies/fireflies.js';
+import { addLandscapeText }      from './components/text.js';
 
 import { createCameraHelper }    from './systems/cameraHelper.js';
 import { createControls }        from './systems/controls.js';
@@ -19,6 +20,7 @@ import { createRenderer }        from './systems/renderer.js';
 import { createPhysicsWorld }    from './components/physicsWorld.js';
 import { Resizer }               from './systems/Resizer.js';
 import { Loop }                  from './systems/Loop.js';
+
 
 let cameraHelper, datGUI;
 
@@ -54,8 +56,9 @@ class World {
     world.sky = createSky(world.renderer, world.scene, world.camera, world.datGUI);
     const landscape = await loadLandscape();
     const flock = await loadBirds();
+    const {fireflies, firefliesMaterial} = await createFireflies(world.datGUI)
 
-    world.scene.add( world.sky, landscape, flock );
+    world.scene.add( world.sky, landscape, flock, fireflies );
 
     // Add Physics simulation
     if(settings.options.simulatePhysics){
@@ -64,9 +67,10 @@ class World {
     }
     // Add objects to animation loop (updatables)
     const { animGaleBlades, animGustoBlades, animFlock} = await createSceneAnimations(world.datGUI);
-    world.loop.updatables.push( animFlock, animGaleBlades, animGustoBlades );
+    world.loop.updatables.push( animFlock, animGaleBlades, animGustoBlades);
     for (const bird of flock.children) { world.loop.updatables.push(bird) }  
-
+    // Add shader updatables
+    world.loop.shaderUpdatables.push(firefliesMaterial)
   };
 
   render() {

@@ -9,7 +9,6 @@ function createDatGUI() {
   // const cameraFolder =  gui.addFolder("Camera controls")
   const envFolder =  gui.addFolder("Environment controls")
 
-
   // 1. Add Stats.js (integrated into Dat GUI)
   settings.gui.stats = Stats()
   document.body.appendChild(settings.gui.stats.dom)
