@@ -80,14 +80,11 @@ fireflies.visible = false
 
 
   // Debug
-  const otherFolder = datGUI.addFolder('Other stuff')
-  otherFolder.add(fireflies, 'visible').name('Show fireflies!')
-  otherFolder.add(firefliesMaterial.uniforms.uSize, 'value').min(0).max(500).step(1).name('Firefly size')
+  settings.elements.datGUIFolders.particlesFolder.add(fireflies, 'visible').name('Show fireflies!')
+  settings.elements.datGUIFolders.particlesFolder.add(firefliesMaterial.uniforms.uSize, 'value').min(0).max(500).step(1).name('Firefly size')
 
 
   return {fireflies, firefliesMaterial}
-
-
 
 }
 

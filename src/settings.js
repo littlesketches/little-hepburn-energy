@@ -65,6 +65,7 @@ const settings = {              // Global object for settings, references (and s
         }
     },
     elements: {
+        datGUIFolders:      {},
         camera: {
             perspective:        null
         },

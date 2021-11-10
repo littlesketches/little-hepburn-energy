@@ -5,9 +5,9 @@ function createDatGUI() {
 
   // Dat GUI and main folders
   const gui = new GUI({name: 'Little Hepburn Energy'});
-  const perfFolder = gui.addFolder("Scene");
-  // const cameraFolder =  gui.addFolder("Camera controls")
-  const envFolder =  gui.addFolder("Environment controls")
+  settings.elements.datGUIFolders.perfFolder = gui.addFolder("Scene");
+  settings.elements.datGUIFolders.envFolder =  gui.addFolder("Environment controls")
+  settings.elements.datGUIFolders.particlesFolder =  gui.addFolder("Particle systems")
 
   // 1. Add Stats.js (integrated into Dat GUI)
   settings.gui.stats = Stats()
@@ -26,10 +26,10 @@ function createDatGUI() {
   perfContainer.appendChild(perfStatsContainer)
   perfLi.classList.add("gui-stats")
   perfStatsContainer.appendChild( settings.gui.stats.domElement);
-  perfFolder.__ul.appendChild(perfLi);
+  settings.elements.datGUIFolders.perfFolder.__ul.appendChild(perfLi);
 
   // 2. Add Lighting controls (with subfolders for directional and hemisphere lights)
-  const lightFolder = envFolder.addFolder('Lighting controls'),
+  const lightFolder = settings.elements.datGUIFolders.envFolder.addFolder('Lighting controls'),
     directionalLightFolder = lightFolder.addFolder('Directional light (sun)'),
     hemiLightFolder = lightFolder.addFolder('Ambient (hemisphere) light')
 
