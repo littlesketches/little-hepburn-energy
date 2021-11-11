@@ -138,7 +138,7 @@ function applyQuerySettings(){
     }
 };
 
-
+// Deprected free API for testing
 // fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=-37.4249805&lon=144.116305&appid=2292652bd18a98be70e21278e4c01da5`)
 //   .then(response => response.json())
 //   .then(data => console.log(data));
